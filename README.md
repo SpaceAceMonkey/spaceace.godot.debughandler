@@ -27,8 +27,8 @@ This code makes it easy to output messages at various levels in various build en
 
 1) Clone this repository or download the file DebugHandler<span/>.gd in the res/ sub-directory. Add DebugHandler<span/>.gd to your Godot project.
 2) Add DebugHandler to your project's AutoLoad settings. Give it a simple name and make sure "Singleton" is enabled. The name you give this singleton will be global, so remember not to create any variables in your code which conflict with it.
-![Select DebugHandler.gd and give it a name you will use to access it in code](https://github.com/SpaceAceMonkey/spaceace.godot.debughandler/images/debug_handler_auto_load.png)
-![Click "add" then close the AutoLoad dialog](https://github.com/SpaceAceMonkey/spaceace.godot.debughandler/images/debug_handler_auto_load_part_2.png)
+![Select DebugHandler.gd and give it a name you will use to access it in code](https://github.com/SpaceAceMonkey/spaceace.godot.debughandler/blob/main/images/debug_handler_auto_load.png)
+![Click "add" then close the AutoLoad dialog](https://github.com/SpaceAceMonkey/spaceace.godot.debughandler/blob/main/images/debug_handler_auto_load_part_2.png)
 
 
 &nbsp;
@@ -278,7 +278,7 @@ The following examples assume you have DebugHandler set up in your Godot AutoLoa
                   YourFile.gd:60 @ _ready()
   ```
 
-  ![Example warning output in the Godot debug console](https://github.com/SpaceAceMonkey/spaceace.godot.debughandler/images/debug_handler_warning_output.png)
+  ![Example warning output in the Godot debug console](https://github.com/SpaceAceMonkey/spaceace.godot.debughandler/blob/main/images/debug_handler_warning_output.png)
 
 - Chaining method calls
 
@@ -354,7 +354,7 @@ W 0:00:00.438   call: This is a more complex message full of [This is
                 Sprite.gd:36 @ _ready()
 ```
 
-  ![A detailed message shown only in debug builds](https://github.com/SpaceAceMonkey/spaceace.godot.debughandler/images/debug_handler_complex_message.png)
+  ![A detailed message shown only in debug builds](https://github.com/SpaceAceMonkey/spaceace.godot.debughandler/blob/main/images/debug_handler_complex_message.png)
 
 #### Note:
 
