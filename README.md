@@ -125,6 +125,8 @@ Defaults to [DebugHandler.level.INFO](#debughandlerlevel-enum).
 
 The DebugHandler instance.
 
+&nbsp;
+
 > enable()
 
 Enables all logging features. If the DebugHandler is disabled, no output will be generated when the above functions are called. DebugHandler is enabled by default, and you only need to call this if you have called `disable()` or otherwise the the DebugHandler.enabled flag to false.
@@ -132,6 +134,8 @@ Enables all logging features. If the DebugHandler is disabled, no output will be
 *Returns*
 
 The DebugHandler instance.
+
+&nbsp;
 
 > disable()
 
