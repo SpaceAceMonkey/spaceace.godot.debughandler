@@ -30,7 +30,6 @@ This code makes it easy to output messages at various levels in various build en
 ![Select DebugHandler.gd and give it a name you will use to access it in code](https://github.com/SpaceAceMonkey/spaceace.godot.debughandler/blob/main/images/debug_handler_auto_load.png)
 ![Click "add" then close the AutoLoad dialog](https://github.com/SpaceAceMonkey/spaceace.godot.debughandler/blob/main/images/debug_handler_auto_load_part_2.png)
 
-
 &nbsp;
 
 ## API
@@ -149,6 +148,8 @@ The DebugHandler instance.
 
 Although the official Godot IDE separates different levels of output (INFO goes to the main Output tab, while WARN and ERROR go to the Debugger -> Errors tab), the same may not be true for third-party development environments. For example, when using VSCode to run your Godot project, all levels of output go to the same terminal. Stack traces may also not be shown if you are not using the official Godot development environment.
 
+&nbsp;
+
 ## DebugHandler.env enum
 
 Used to select which environment(s) a message should be displayed in.
@@ -180,6 +181,8 @@ Used to set the level of the message.
   - Outputs to both the INFO and WARN channels.
 - INFO_WARN
   - Outputs to both the INFO and ERROR channels.
+
+&nbsp;
 
 ## Examples
 
