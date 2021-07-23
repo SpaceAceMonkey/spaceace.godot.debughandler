@@ -178,9 +178,9 @@ Used to set the level of the message.
   - Outputs to the Debugger -> Errors tab in Godot, or to the OS terminal when run from outside of Godot. In Godot, and in most terminals, the message will be highlighted in yellow.
   - Includes the stack trace when run from the Godot IDE.
 - INFO_ERROR
-  - Outputs to both the INFO and WARN channels.
-- INFO_WARN
   - Outputs to both the INFO and ERROR channels.
+- INFO_WARN
+  - Outputs to both the INFO and WARN channels.
 
 &nbsp;
 
