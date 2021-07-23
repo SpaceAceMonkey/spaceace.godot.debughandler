@@ -15,9 +15,26 @@ enum level {
 	INFO_WARN = 3
 }
 
+var enabled = true setget ,is_enabled
 
-func _ready():
-	self.debug("DebugHandler ready")
+
+# The user could just access enabled directly, but using this getter
+# allows us to add additional logic if desired.
+func is_enabled():
+	return enabled
+
+
+# Globally enable debug output.
+func enable():
+	self.enabled = true
+
+	return self
+
+
+func disable():
+	self.enabled = false
+
+	return self
 
 
 # Save yourself a few keystrokes
@@ -63,9 +80,12 @@ func print(message, env = self.env.DEBUG, level = self.level.INFO):
 func should_print(env):
 	var result = false
 	if (
-		env == self.env.ALL
-		|| (env & self.env.PRODUCTION && !OS.is_debug_build())
-		|| (!(env & self.env.PRODUCTION) && OS.is_debug_build())
+		self.enabled
+		&& (
+			env == self.env.ALL
+			|| (env & self.env.PRODUCTION && !OS.is_debug_build())
+			|| (!(env & self.env.PRODUCTION) && OS.is_debug_build())
+		)
 	):
 		result = true
 
