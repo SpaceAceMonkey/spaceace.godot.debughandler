@@ -300,92 +300,127 @@ The following examples assume you have DebugHandler set up in your Godot AutoLoa
 
   ![Example warning output in the Godot debug console](https://github.com/SpaceAceMonkey/spaceace.godot.debughandler/blob/main/images/debug_handler_warning_output.png)
 
+- Combining bit flags
+
+  The values in the [env](#debughandlerenv-enum) and [level](#debughandlerlevel-enum) enums can be combined arbitrarily to achieve various outcomes. The enums serve as bit-flags, and the `|` operator is used to combine them.
+
+  ##### Output to the info and warning channels when running a debug build
+
+  ```
+  dh.print(
+    "A debug message for every environment"
+    , dh.env.DEBUG | dh.env.PRODUCTION
+    , dh.level.INFO | dh.level.WARN
+  )
+
+  # You can also use the a() function, which is the same as
+  # combining dh.env.DEBUG with dh.env.PRODUCTION as shown above.
+
+  dh.a(
+    "A debug message for every environment"
+    , dh.level.INFO | dh.level.WARN
+  )
+  ```
+
+  ##### Output to all channels in a debug build using ORed bit-flags
+
+  ```
+  # This is not a very practical example, as you could just replace the
+  # ORed values with the single value of dh.level.ALL, but it serves to
+  # illustrate that you can combine the flags in any way you wish.
+
+  dh.d(
+    "A debug message for every level"
+    , dh.level.INFO_WARN | dh.level.ERROR
+  )
+  ```
+
 - Chaining method calls
 
-##### Output several info-level messages to the console in all build environments
+  ##### Output several info-level messages to the console in all build environments
 
-```
-dh.print(
-  "Message one", dh.env.ALL
-).print(
-  "Message two", dh.env.ALL
-).print(
-  "Message three", dh.env.ALL
-).print(
-  "Message four", dh.env.ALL
-)
+  ```
+  dh.print(
+    "Message one", dh.env.ALL
+  ).print(
+    "Message two", dh.env.ALL
+  ).print(
+    "Message three", dh.env.ALL
+  ).print(
+    "Message four", dh.env.ALL
+  )
 
-# Alternatively, use the a() helper method.
+  # Alternatively, use the a() helper method.
 
-dh.a(
-  "Message one"
-).a(
-  "Message two"
-).a(
-  "Message three"
-).a(
-  "Message four"
-)
-```
+  dh.a(
+    "Message one"
+  ).a(
+    "Message two"
+  ).a(
+    "Message three"
+  ).a(
+    "Message four"
+  )
+  ```
 
-*Output*
+  *Output*
 
-```
-Message one
-Message two
-Message three
-Message four
-```
+  ```
+  Message one
+  Message two
+  Message three
+  Message four
+  ```
 
-##### Output one message at WARN level when running a debug build, and a different message at INFO level when running a production build
+  ##### Output one message at WARN level when running a debug build, and a different message at INFO level when running a production build
 
-```
-dh.p(
-  "This is a simple message shown only when running a production build."
-).d(
-  """
-  This is a more complex message full of {information} and {data},
-  which includes a stack trace when run from the Godot IDE, and
-  will only be shown when running a debug build.
-  """.format({
-    "information": "This is additional information you would like to
-    see in the WARN output"
-    , "data": "This is any additional data you feel like including in the 
-    message"
-  })
-  , dh.level.WARN
-)
-```
+  ```
+  dh.p(
+    "This is a simple message shown only when running a production build."
+  ).d(
+    """
+    This is a more complex message full of {information} and {data},
+    which includes a stack trace when run from the Godot IDE, and
+    will only be shown when running a debug build.
+    """.format({
+      "information": "This is additional information you would like to
+      see in the WARN output"
+      , "data": "This is any additional data you feel like including in the 
+      message"
+    })
+    , dh.level.WARN
+  )
+  ```
 
-*Output*
+  *Output*
 
-[Debug build]
+  [Debug build]
 
-```
-W 0:00:00.438   call: This is a more complex message full of [This is
- additional information you would like to see in the WARN output] and 
- [This is any additional data you feel like including in the message], 
- which includes a stack trace when run from the Godot IDE, and will only 
- be shown when running a debug build.
-  <C++ Source>  modules/gdscript/gdscript_functions.cpp:817 @ call()
-  <Stack Trace> DebugHandler.gd:58 @ print()
-                DebugHandler.gd:38 @ debug()
-                DebugHandler.gd:28 @ d()
-                Sprite.gd:36 @ _ready()
-```
+  ```
+  W 0:00:00.438   call: This is a more complex message full of [This is
+  additional information you would like to see in the WARN output] and 
+  [This is any additional data you feel like including in the message], 
+  which includes a stack trace when run from the Godot IDE, and will only 
+  be shown when running a debug build.
+    <C++ Source>  modules/gdscript/gdscript_functions.cpp:817 @ call()
+    <Stack Trace> DebugHandler.gd:58 @ print()
+                  DebugHandler.gd:38 @ debug()
+                  DebugHandler.gd:28 @ d()
+                  Sprite.gd:36 @ _ready()
+  ```
 
-  ![A detailed message shown only in debug builds](https://github.com/SpaceAceMonkey/spaceace.godot.debughandler/blob/main/images/debug_handler_complex_message.png)
+    ![A detailed message shown only in debug builds](https://github.com/SpaceAceMonkey/spaceace.godot.debughandler/blob/main/images/debug_handler_complex_message.png)
 
-#### Note:
+  #### Note:
 
-The message from the dh.p() call did not show up, as p() only outputs to production environments.
+  The message from the dh.p() call did not show up, as p() only outputs to production environments.
 
-*Output*
+  *Output*
 
-[Production build]
+  [Production build]
 
-`This is a simple message shown only when running a production build.`
+  `This is a simple message shown only when running a production build.`
 
-#### Note:
+  #### Note:
 
-The complex message from the call to dh.d() is not shown, as this code was run from a production build.
+  The complex message from the call to dh.d() is not shown, as this code was run from a production build.
